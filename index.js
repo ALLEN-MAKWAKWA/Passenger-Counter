@@ -8,7 +8,7 @@ function increment() {
 
     // Bump animation
     countEl.classList.remove("bump")
-    void countEl.offsetWidth // reflow to restart animation
+    void countEl.offsetWidth 
     countEl.classList.add("bump")
     setTimeout(() => countEl.classList.remove("bump"), 200)
 }
