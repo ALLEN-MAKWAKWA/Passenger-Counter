@@ -1,50 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-image: url("station.jpg");
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 8, 40, 0.75) 0%,
+        rgba(28, 40, 80, 0.65) 50%,
+        rgba(10, 20, 10, 0.75) 100%
+    );
+    z-index: 0;
 }
 
 .container {
-    background: white;
-    max-width: 80%;
-    margin: auto;
-    border: 3px solid black;
-    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    max-width: 480px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    padding: 52px 40px 40px;
+    box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255,255,255,0.05) inset,
+        0 2px 0 rgba(255,255,255,0.15) inset;
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+.container::before {
+    content: '🚉 LIVE TRACKING';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #2C2891, #4a3fcc);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    white-space: nowrap;
 }
 
 h1 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 20px rgba(100, 120, 255, 0.4);
 }
 
 h2 {
-    font-size: 50px;
-    margin-top: 0;
-    margin-bottom: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 110px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 10px 0 28px;
+    background: linear-gradient(135deg, #ffffff 30%, #a8b4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 24px rgba(100, 120, 255, 0.35));
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+h2.bump {
+    transform: scale(1.12);
+    filter: drop-shadow(0 4px 32px rgba(100, 120, 255, 0.75));
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
 }
 
 button {
-    border: 1px solid black;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    border: none;
+    padding: 14px 0;
     color: white;
-    font-weight: bold;
-    width: 200px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    width: 220px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+}
+
+button:hover::after { background: rgba(255,255,255,0.1); }
+button:active { transform: scale(0.96) !important; }
+
 #increment-btn {
-    background: #2C2891;
+    background: linear-gradient(135deg, #2C2891 0%, #4a3fcc 100%);
+    box-shadow: 0 8px 24px rgba(44,40,145,0.55), 0 1px 0 rgba(255,255,255,0.15) inset;
+}
+#increment-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(44,40,145,0.7), 0 1px 0 rgba(255,255,255,0.15) inset;
 }
 
 #save-btn {
-    background: #1C7947;
+    background: linear-gradient(135deg, #1C7947 0%, #27ae60 100%);
+    box-shadow: 0 8px 24px rgba(28,121,71,0.55), 0 1px 0 rgba(255,255,255,0.15) inset;
+}
+#save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(28,121,71,0.7), 0 1px 0 rgba(255,255,255,0.15) inset;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    margin: 28px 0 16px;
 }
 
 #save-el {
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.5px;
+    min-height: 20px;
+    line-height: 1.8;
+    word-break: break-all;
 }
 
+/* Footer */
+footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 32px;
+    animation: fadeUp 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social-icons a:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    color: #fff;
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.social-icons svg {
+    width: 18px;
+    height: 18px;
+}
+
+footer p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+}
